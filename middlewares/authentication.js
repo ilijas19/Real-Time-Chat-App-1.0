@@ -1,7 +1,7 @@
 const Token = require("../models/Token");
 const CustomError = require("../errors");
 
-const { verifyToken } = require("../utils");
+const { verifyToken, attachCookiesToResponse } = require("../utils");
 
 const authorizePermission = (...roles) => {
   return (req, res, next) => {
@@ -16,7 +16,6 @@ const authenticateUser = async (req, res, next) => {
     const { accessToken, refreshToken } = req.signedCookies;
     if (accessToken) {
       req.user = verifyToken(accessToken);
-      // console.log(req.user);
       return next();
     }
     if (refreshToken) {
@@ -28,7 +27,8 @@ const authenticateUser = async (req, res, next) => {
       const { isValid } = token;
 
       if (isValid) {
-        req.user = payload.user;
+        req.user = payload;
+        // console.log(req.user, "from refresh Token");
         return next();
       }
     }
@@ -39,3 +39,20 @@ const authenticateUser = async (req, res, next) => {
 };
 
 module.exports = { authenticateUser, authorizePermission };
+
+// {
+//   user: {
+//     userId: '6721fca24c1d941ed90e819d',
+//     role: 'user',
+//     username: 'ilijas19',
+//     email: 'ilijagocic19@gmail.com'
+//   },
+//   iat: 1730484497
+// } from access Token
+
+// {
+//   userId: '6721fca24c1d941ed90e819d',
+//   role: 'user',
+//   username: 'ilijas19',
+//   email: 'ilijagocic19@gmail.com'
+// }
