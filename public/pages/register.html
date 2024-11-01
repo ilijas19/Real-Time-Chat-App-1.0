@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="styles/authStyle.css" />
+  </head>
+  <body>
+    <h1>Register</h1>
+    <form id="register-form">
+      <label for="">Username</label>
+      <input type="text" id="register-username" />
+      <label for="">Email</label>
+      <input type="text" id="register-email" />
+      <label for="">Password</label>
+      <input type="text" id="register-password" />
+      <button type="submit" id="register-button">Register</button>
+      <a href="login">Already Have An Account</a>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="src/controller.js"></script>
+  </body>
+</html>
